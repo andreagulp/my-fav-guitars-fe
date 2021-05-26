@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import Search from './Search';
 
 export default function Header() {
   return (
@@ -30,6 +31,7 @@ export default function Header() {
             <a className='mr-5 hover:text-gray-900'>About</a>
           </Link>
         </nav>
+        <Search />
       </div>
     </header>
   );
