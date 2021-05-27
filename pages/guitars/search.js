@@ -41,7 +41,6 @@ export async function getServerSideProps({ query: { term } }) {
   });
 
   const res = await fetch(`${API_URL}/guitars?${query}`);
-
   const guitars = await res.json();
 
   return {

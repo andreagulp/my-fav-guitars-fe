@@ -1,4 +1,4 @@
-import GuitarProductCard from '@/components/GuitarProductCard';
+import GuitarProductCard from '@/components/guitar-product-card/GuitarProductCard';
 import Layout from '@/components/Layout';
 import { API_URL } from '@/config/index';
 

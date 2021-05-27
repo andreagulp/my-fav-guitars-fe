@@ -30,6 +30,9 @@ export default function Header() {
           <Link href='/about'>
             <a className='mr-5 hover:text-gray-900'>About</a>
           </Link>
+          <Link href='/test'>
+            <a className='mr-5 hover:text-gray-900'>Test</a>
+          </Link>
         </nav>
         <Search />
       </div>

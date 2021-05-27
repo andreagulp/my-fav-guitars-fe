@@ -14,10 +14,10 @@ export default function Search() {
   return (
     <form
       onSubmit={handleSubmit}
-      class='relative mx-auto text-gray-600 lg:block'
+      className='relative mx-auto text-gray-600 lg:block'
     >
       <input
-        class='border-2 border-gray-300 bg-white h-10 pl-2 pr-8 rounded-lg text-sm focus:outline-none'
+        className='border-2 border-gray-300 bg-white h-10 pl-2 pr-8 rounded-lg text-sm focus:outline-none'
         type='search'
         name='search'
         placeholder='Search'
@@ -27,10 +27,10 @@ export default function Search() {
       <button
         onClick={handleSubmit}
         type='submit'
-        class='absolute right-0 top-0 mt-3 mr-2'
+        className='absolute right-0 top-0 mt-3 mr-2'
       >
         <svg
-          class='text-gray-600 h-4 w-4 fill-current'
+          className='text-gray-600 h-4 w-4 fill-current'
           xmlns='http://www.w3.org/2000/svg'
           version='1.1'
           id='Capa_1'
