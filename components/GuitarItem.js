@@ -1,30 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import GuitarImg from './GuitarImg';
 
 export default function GuitarItem({ guitar }) {
   return (
-    <article className='flex flex-col bg-coolGray-50'>
+    <article className='flex flex-col bg-coolGray-50 text-center'>
       <Link href={`/guitars/${guitar.id}`}>
         <a href='#'>
-          {guitar.img_main ? (
-            <Image
-              src={guitar.img_main.formats.small.url}
-              alt={guitar.model}
-              layout='intrinsic'
-              width={200}
-              height={200}
-              objectFit='contain'
-            />
-          ) : (
-            <Image
-              src='/default-guitar.svg'
-              alt='Default Guitar'
-              layout='intrinsic'
-              width={200}
-              height={200}
-              // objectFit='contain'
-            />
-          )}
+          <GuitarImg guitar={guitar} width='200' height='200' />
         </a>
       </Link>
       <div className='flex flex-col flex-1 p-6'>

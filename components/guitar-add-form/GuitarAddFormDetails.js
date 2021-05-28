@@ -3,7 +3,10 @@ import { useFormContext } from 'react-hook-form';
 export default function GuitarAddFormDetails({ setTab, woodOption }) {
   console.log(woodOption);
 
-  const { register } = useFormContext();
+  const {
+    register,
+    formState: { errors, touchedFields },
+  } = useFormContext();
 
   return (
     <>
@@ -17,7 +20,7 @@ export default function GuitarAddFormDetails({ setTab, woodOption }) {
           </label>
 
           <select
-            {...register('top_wood')}
+            {...register('top_wood', { required: 'select one option' })}
             className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring'
           >
             <option></option>
@@ -27,6 +30,16 @@ export default function GuitarAddFormDetails({ setTab, woodOption }) {
               </option>
             ))}
           </select>
+          {!touchedFields.top_wood && (
+            <span className='text-xs text-red-700' id='passwordHelp'>
+              This is a required Field
+            </span>
+          )}
+          {errors.top_wood && (
+            <span className='text-xs text-red-700' id='passwordHelp'>
+              This is a required Field
+            </span>
+          )}
         </div>
 
         <div className='my-10'>
