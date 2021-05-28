@@ -47,9 +47,8 @@ export default function addPage({ woods }) {
     if (!res.ok) {
       toast.error('Something went wrong');
     } else {
-      toast.success('New Guitar has been added');
-      // const guitar = await res.json();
-      router.push(`/guitars`);
+      const guitar = await res.json();
+      router.push(`/guitars/${guitar.id}`);
     }
   };
 
