@@ -9,7 +9,7 @@ import GuitarAddFormMesures from '@/components/guitar-add-form/GuitarAddFormMesu
 import { API_URL } from '@/config/index';
 import { useRouter } from 'next/router';
 
-export default function addPage({ woods }) {
+export default function editPage({ guitar, woods }) {
   const router = useRouter();
 
   const woodOption = woods.map((w) => {
@@ -23,8 +23,22 @@ export default function addPage({ woods }) {
 
   const [tab, setTab] = useState('description');
 
-  const methods = useForm({ mode: 'onChange' });
+  const methods = useForm({
+    mode: 'onChange',
+    defaultValues: {
+      ...guitar,
+      top_wood: guitar.top_wood.id,
+      back_wood: guitar.back_wood.id,
+      neck_wood: guitar.neck_wood.id,
+      fretboard_wood: guitar.fretboard_wood.id,
+      side_wood: guitar.side_wood.id,
+    },
+  });
+
+  console.log(guitar);
+
   const {
+    register,
     handleSubmit,
     formState: { isValid },
   } = methods;
@@ -33,8 +47,8 @@ export default function addPage({ woods }) {
     if (!isValid) {
       toast.error('The Form is not complete');
     }
-    const res = await fetch(`${API_URL}/guitars`, {
-      method: 'POST',
+    const res = await fetch(`${API_URL}/guitars/${guitar.id}`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -99,7 +113,11 @@ export default function addPage({ woods }) {
             )}
 
             {tab === 'details' && (
-              <GuitarAddFormDetails setTab={setTab} woodOption={woodOption} />
+              <GuitarAddFormDetails
+                setTab={setTab}
+                woodOption={woodOption}
+                guitar={guitar}
+              />
             )}
 
             {tab === 'measures' && (
@@ -123,12 +141,17 @@ export default function addPage({ woods }) {
   );
 }
 
-export async function getStaticProps() {
-  const res = await fetch(`${API_URL}/woods?_sort=name:ASC`);
-  const woods = await res.json();
+export async function getServerSideProps({ query: { id } }) {
+  const res = await fetch(`${API_URL}/guitars?id=${id}`);
+  const guitars = await res.json();
+
+  const resW = await fetch(`${API_URL}/woods?_sort=name:ASC`);
+  const woods = await resW.json();
 
   return {
-    props: { woods },
-    revalidate: 1,
+    props: {
+      guitar: guitars[0],
+      woods,
+    },
   };
 }

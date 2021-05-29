@@ -10,6 +10,7 @@ import GuitarImg from '@/components/GuitarImg';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 export default function GuitarPage({ guitar }) {
   const router = useRouter();
@@ -52,21 +53,24 @@ export default function GuitarPage({ guitar }) {
               <div className='flex'>
                 <div className='w-4 mr-2 transform hover:text-purple-500 hover:scale-110'>
                   <div className='group cursor-pointer relative  border-gray-400'>
-                    <a onClick={handleEdit} href='#'>
-                      <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        fill='none'
-                        viewBox='0 0 24 24'
-                        stroke='currentColor'
-                      >
-                        <path
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          strokeWidth='2'
-                          d='M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z'
-                        />
-                      </svg>
-                    </a>
+                    <Link href={`/guitars/edit/${guitar.id}`}>
+                      <a onClick={handleEdit} href='#'>
+                        <svg
+                          xmlns='http://www.w3.org/2000/svg'
+                          fill='none'
+                          viewBox='0 0 24 24'
+                          stroke='currentColor'
+                        >
+                          <path
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
+                            strokeWidth='2'
+                            d='M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z'
+                          />
+                        </svg>
+                      </a>
+                    </Link>
+                    {/* tooltip */}
                     <div className='opacity-0 w-28 bg-black text-white text-center text-xs rounded-lg py-2 absolute z-10 group-hover:opacity-60 bottom-full   px-3 pointer-events-none'>
                       Edit Guitar
                       <svg
@@ -102,6 +106,7 @@ export default function GuitarPage({ guitar }) {
                         />
                       </svg>
                     </a>
+                    {/* tooltip */}
                     <div className='opacity-0 w-28 bg-black text-white text-center text-xs rounded-lg py-2 absolute z-10 group-hover:opacity-60 bottom-full   px-3 pointer-events-none'>
                       Delete Guitar
                       <svg
