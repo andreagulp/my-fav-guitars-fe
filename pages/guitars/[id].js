@@ -14,12 +14,8 @@ import Link from 'next/link';
 
 export default function GuitarPage({ guitar }) {
   const router = useRouter();
-  console.log(guitar);
+  // console.log(guitar);
   const [tab, setTab] = useState('description');
-
-  const handleEdit = (e) => {
-    console.log('Edit was clicked');
-  };
 
   const handleDelete = async (e) => {
     if (confirm('Are you sure')) {
@@ -54,7 +50,7 @@ export default function GuitarPage({ guitar }) {
                 <div className='w-4 mr-2 transform hover:text-purple-500 hover:scale-110'>
                   <div className='group cursor-pointer relative  border-gray-400'>
                     <Link href={`/guitars/edit/${guitar.id}`}>
-                      <a onClick={handleEdit} href='#'>
+                      <a href='#'>
                         <svg
                           xmlns='http://www.w3.org/2000/svg'
                           fill='none'

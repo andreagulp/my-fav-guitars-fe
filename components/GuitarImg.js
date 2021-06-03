@@ -3,10 +3,10 @@ import Image from 'next/image';
 export default function GuitarImg({ guitar, width, height }) {
   return (
     <>
-      {guitar.img_main ? (
+      {guitar.img_main?.formats ? (
         <Image
           className='lg:w-auto w-full lg:h h-64 object-cover object-top rounded '
-          src={guitar.img_main.formats.small.url}
+          src={guitar.img_main.formats?.small?.url}
           alt={guitar.model}
           layout='intrinsic'
           width={width}

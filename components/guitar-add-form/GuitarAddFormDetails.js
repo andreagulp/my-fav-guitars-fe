@@ -2,8 +2,8 @@ import { useFormContext } from 'react-hook-form';
 import GuitarImg from '../GuitarImg';
 
 export default function GuitarAddFormDetails({ setTab, woodOption, guitar }) {
-  console.log('woodOption', woodOption);
-  console.log('guitar', guitar);
+  // console.log('woodOption', woodOption);
+  // console.log('guitar', guitar);
 
   const {
     register,

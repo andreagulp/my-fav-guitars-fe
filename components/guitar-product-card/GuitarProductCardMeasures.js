@@ -38,7 +38,7 @@ export default function GuitarProductCardMeasures({ guitar }) {
 
       <div className='flex border-t border-b mb-6 border-gray-200 py-2'>
         <span className='text-gray-500'>Number of Frets</span>
-        <span className='ml-auto text-gray-900'>{guitar.frets_nuber}</span>
+        <span className='ml-auto text-gray-900'>{guitar.frets_number}</span>
       </div>
     </div>
   );

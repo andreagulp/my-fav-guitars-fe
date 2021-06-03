@@ -7,7 +7,7 @@ export default function GuitarProductCardDescription({ guitar }) {
         <span className='text-gray-500'>Top Wood</span>
         <span className='ml-auto text-gray-900'>
           {`${guitar.solid_top ? 'solid' : 'laminated'} ${
-            guitar.top_wood.name
+            guitar.top_wood?.name
           } `}
         </span>
       </div>

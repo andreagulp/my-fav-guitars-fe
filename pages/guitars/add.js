@@ -8,6 +8,9 @@ import GuitarAddFormDetails from '@/components/guitar-add-form/GuitarAddFormDeta
 import GuitarAddFormMesures from '@/components/guitar-add-form/GuitarAddFormMesures';
 import { API_URL } from '@/config/index';
 import { useRouter } from 'next/router';
+import GuitarFormTabs from '@/components/GuitarFormTabs';
+import GuitarImg from '@/components/GuitarImg';
+import ImageUpload from '@/components/ImageUpload';
 
 export default function addPage({ woods }) {
   const router = useRouter();
@@ -17,11 +20,12 @@ export default function addPage({ woods }) {
       id: w.id,
       name: w.name,
     };
-
     return newList;
   });
 
   const [tab, setTab] = useState('description');
+  const [newImg, setNewImg] = useState();
+  const [uploadImg, setUploadImg] = useState();
 
   const methods = useForm({ mode: 'onChange' });
   const {
@@ -29,7 +33,39 @@ export default function addPage({ woods }) {
     formState: { isValid },
   } = methods;
 
+  // const handleUpdateImage = async (e) => {
+  //   console.log('update image started');
+  //   const formData = new FormData();
+  //   formData.append('files', uploadImg);
+
+  //   formData.append('ref', 'guitars');
+  //   // formData.append('refId', guitar.id);
+  //   formData.append('field', 'img_main');
+
+  //   const res = await fetch(`${API_URL}/upload`, {
+  //     method: 'POST',
+  //     body: formData,
+  //   });
+
+  //   if (res.ok) {
+  //     toast.success('New Image is Uploading');
+  //     router.push(`/guitars/${guitar.id}`);
+  //     // router.push(`/guitars/edit/${guitar.id}`);
+  //     setNewImg('');
+  //     console.log('updateimage completed successfull');
+  //   } else {
+  //     console.log('updateimage completed with error');
+  //     toast.error(
+  //       'Something went wrong with the image, try to edit the guitar and update the image again'
+  //     );
+  //   }
+  // };
+
   const onSubmit = async (data) => {
+    console.log('data', data);
+    console.log('newImg', newImg);
+    console.log('uploadImg', uploadImg);
+
     if (!isValid) {
       toast.error('The Form is not complete');
     }
@@ -40,13 +76,19 @@ export default function addPage({ woods }) {
       },
       body: JSON.stringify({
         ...data,
+        // img_main: uploadImg,
       }),
     });
+
+    // const guitarId = res.data.id;
+    // console.log('guitarid', guitarId);
 
     if (!res.ok) {
       toast.error('Something went wrong');
     } else {
       const guitar = await res.json();
+      toast.success('Guitar has been added');
+      // await handleUpdateImage();
       router.push(`/guitars/${guitar.id}`);
     }
   };
@@ -54,53 +96,30 @@ export default function addPage({ woods }) {
   return (
     <Layout>
       <section className='max-w-4xl p-6 mx-auto bg-white rounded-md dark:bg-gray-800'>
-        <h2 className='text-lg font-semibold text-gray-700 dark:text-white'>
-          Add a Guitar
-        </h2>
-        <div className='flex mb-4'>
-          <a
-            href='#'
-            onClick={() => setTab('description')}
-            className={`${
-              tab === 'description'
-                ? 'text-indigo-500 flex-grow  border-b-2 border-indigo-500 py-2 text-lg px-1'
-                : 'flex-grow border-gray-300 border-b-2 py-2 text-lg px-1'
-            }`}
-          >
-            Description
-          </a>
-          <a
-            href='#'
-            onClick={() => setTab('details')}
-            className={`${
-              tab === 'details'
-                ? 'text-indigo-500 flex-grow  border-b-2 border-indigo-500 py-2 text-lg px-1'
-                : 'flex-grow border-gray-300 border-b-2 py-2 text-lg px-1'
-            }`}
-          >
-            Details
-          </a>
-          <a
-            href='#'
-            onClick={() => setTab('measures')}
-            className={`${
-              tab === 'measures'
-                ? 'text-indigo-500 flex-grow  border-b-2 border-indigo-500 py-2 text-lg px-1'
-                : 'flex-grow border-gray-300 border-b-2 py-2 text-lg px-1'
-            }`}
-          >
-            Measures
-          </a>
-        </div>
+        <h2 className='text-lg font-semibold text-gray-700 dark:text-white'>Add a Guitar</h2>
+
+        <GuitarFormTabs setTab={setTab} tab={tab} />
+
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(onSubmit)}>
             {tab === 'description' && (
-              <GuitarAddFormDescription setTab={setTab} />
+              <>
+                <GuitarAddFormDescription setTab={setTab} />
+                {/* {newImg ? (
+                  <img
+                    className='lg:w-auto w-full lg:h h-64 object-cover object-top rounded '
+                    src={newImg}
+                    alt='preview file'
+                  />
+                ) : (
+                  <h3>No Image Yet</h3>
+                )} */}
+
+                {/* <ImageUpload setUploadImg={setUploadImg} setNewImg={setNewImg} /> */}
+              </>
             )}
 
-            {tab === 'details' && (
-              <GuitarAddFormDetails setTab={setTab} woodOption={woodOption} />
-            )}
+            {tab === 'details' && <GuitarAddFormDetails setTab={setTab} woodOption={woodOption} />}
 
             {tab === 'measures' && (
               <>

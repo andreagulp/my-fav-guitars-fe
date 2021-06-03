@@ -6,8 +6,8 @@ export default function GuitarAddFormDescription({ setTab }) {
     formState: { errors, touchedFields },
   } = useFormContext();
 
-  console.log('touchedFields', touchedFields);
-  console.log('errors', errors);
+  // console.log('touchedFields', touchedFields);
+  // console.log('errors', errors);
 
   return (
     <>
