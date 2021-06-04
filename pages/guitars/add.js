@@ -89,7 +89,7 @@ export default function addPage({ woods }) {
       const guitar = await res.json();
       toast.success('Guitar has been added');
       // await handleUpdateImage();
-      router.push(`/guitars/${guitar.id}`);
+      router.push(`/guitars/edit/${guitar.id}`);
     }
   };
 

@@ -108,6 +108,14 @@ export default function editPage({ guitar, woods }) {
             {tab === 'description' && (
               <>
                 <GuitarAddFormDescription setTab={setTab} />
+
+                <ImageUpload
+                  guitar={guitar}
+                  setUploadImg={setUploadImg}
+                  setNewImg={setNewImg}
+                  newImg={newImg}
+                />
+
                 {newImg ? (
                   <img
                     className='lg:w-auto w-full lg:h h-64 object-cover object-top rounded '
@@ -117,13 +125,6 @@ export default function editPage({ guitar, woods }) {
                 ) : (
                   <GuitarImg guitar={guitar} width={200} height={300} />
                 )}
-
-                <ImageUpload
-                  guitar={guitar}
-                  setUploadImg={setUploadImg}
-                  setNewImg={setNewImg}
-                  newImg={newImg}
-                />
               </>
             )}
 
